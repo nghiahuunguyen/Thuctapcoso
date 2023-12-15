@@ -86,69 +86,78 @@ void mouse(){
         if (ismouseclick(WM_LBUTTONDOWN)) {
             getmouseclick(WM_LBUTTONDOWN, x_mouse, y_mouse);
 
-            if (x_mouse > 580 && x_mouse < 680 && y_mouse > 10 && y_mouse < 50) { // Nút "Load file"                
-                if (isPolygonClicked) { // Neu dã bam nút "Polygon"
-                	printf("Lay toa do tu file...\n");
-                    readfilePolygon();
-					drawPolygon();
-                }
-				else if (isCricleClicked){
-					printf("Lay toa do tu file...\n");
-					readfileCircle();
-                	drawCircle();
-				}
-				else if(isElipClicked){
-					printf("Lay toa do tu file...\n");
-					readfileElip();
-                	drawEllipse ();
-				} 
-				else {
-			        printf("Chua chon hinh. Vui long chon lai.\n");
-			    }
+            if (x_mouse > 580 && x_mouse < 680 && y_mouse > 10 && y_mouse < 50) { // N?t "Load file"
+				if (isPolygonClicked) { 
+			    reset();
+			    printf("Lay toa do tu file...\n");
+			    readfilePolygon(); 
+			    drawPolygon(); 
+			}
+			else if (isCricleClicked) {
+			    reset();
+			    printf("Lay toa do tu file...\n");
+			    readfileCircle(); 
+			    drawCircle(); 
+			}
+			else if (isElipClicked) {
+			    reset();
+			    printf("Lay toa do tu file...\n");
+			    readfileElip(); 
+			    drawEllipse(); 
+			}
+			else {
+			    reset();
+			    printf("Chua chon hinh. Vui long chon lai.\n");
+			}
+			    
             } 
-            // Nút "Keyboard"
+            // Nut "Keyboard"
 			if (x_mouse > 580 && x_mouse < 680 && y_mouse > 70 && y_mouse < 110) { 
-                if (isPolygonClicked) { // Neu dã bam nút "Polygon"
+                if (isPolygonClicked) { 
+                	reset();
 	                printf("Nhap du lieu ban phim...\n");
 	                keyboard();
                     drawPolygon();
                 } 
 				else if (isCricleClicked){
+					reset();
 					printf("Nhap du lieu ban phim...\n");
                 	keyboard();
                 	drawCircle();
 				}
 				else if(isElipClicked){
+					reset();
 					printf("Nhap du lieu ban phim...\n");
                 	keyboard();
                 	drawEllipse ();
 				}
 				else {
+					reset();
 			        printf("Chua chon hinh. Vui long chon lai.\n");
 			    }				
             } 
-            // Nút "Reset"
+            // N?t "Reset"
 			if (x_mouse > 580 && x_mouse < 680 && y_mouse > 130 && y_mouse < 170) { 
                 printf("Reset...\n");
                 reset();
             } 
-            // Nút "Exit"
+            // N?t "Exit"
             if (x_mouse > 580 && x_mouse < 680 && y_mouse > 190 && y_mouse < 230) {
                 exit();
             }
-            // Nút "Polygon"
+            // N?t "Polygon"
 			if (x_mouse > 20 && x_mouse < 110 && y_mouse > 320 && y_mouse < 360) { 
                 printf("Ve da giac\n");
                 printf("Chon du lieu file hay ban phim\n");
                 isPolygonClicked = true;
             } 
-            // Nút "Cricle"
+            // N?t "Cricle"
 			if (x_mouse > 220 && x_mouse < 310 && y_mouse > 320 && y_mouse < 360) { 
                 printf("Ve hinh tron\n");
                 printf("Chon du lieu file hay ban phim\n");
                 isCricleClicked = true;
             }
-            // Nút "Elip"
+            // N?t "Elip"
 			if (x_mouse > 420 && x_mouse < 510 && y_mouse > 320 && y_mouse < 360) { 
                 printf("Ve hinh elip.\n");
                 printf("Chon du lieu file hay ban phim\n");
@@ -241,10 +250,14 @@ void drawPolygon(){
         return;
     }
     setcolor(YELLOW);
-    for (int i = 0; i < sodinh - 1; i++) {
+    delay(1000); 
+    for (int i = 0; i < sodinh - 1; i++) {\
+    	delay(1000); 
         line(td[i].x, td[i].y, td[i + 1].x, td[i + 1].y);
     }
+    delay(1000); 
     line(td[sodinh - 1].x, td[sodinh - 1].y, td[0].x, td[0].y);
+    
 }
 //ve hinh tron
 void drawCircle() {
@@ -273,7 +286,9 @@ void drawCircle() {
             p += 2 * (x - y) + 5;
         }
         x++;
+        delay(50);
     }
+     
 }
 
 // Vehinhellip
@@ -316,6 +331,7 @@ void drawEllipse() {
             y--;
             p += 2 * pow(b, 2) * x - 2 * pow(a, 2) * y + pow(a, 2);
         }
+        delay(50); 
     }
     printpoints(td,sodinh);
 }
@@ -325,7 +341,7 @@ void reset(){
 	isPolygonClicked = false;
     isCricleClicked = false;
     isElipClicked = false;
-     sodinh = 0;
+    sodinh = 0;
     cleardevice();
     CUI_init();
 }
