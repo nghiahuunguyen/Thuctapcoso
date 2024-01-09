@@ -41,15 +41,6 @@ struct toado{
 	int y;
 };
 struct toado td[MAX]; //moi td la 1 kieu toado(x,y,value)
-
-
-
-void printpoints(struct toado m[MAX], int size){
-	for(int i=0;i<size;i++){
-		printf("%d %d\n",m[i].x,m[i].y);
-	}
-}
-
 //ve 
 void CUI_init(){
 	setcolor(WHITE);
@@ -80,12 +71,6 @@ void CUI_init(){
 	rectangle(660,250,760,290);
 	settextstyle(2,0,7);
 	outtextxy(670,260,"Exit\n");
-	
-	settextstyle(2,0,7);
-	outtextxy(560,320,"Ten sv: Nguyen Huu Nghia\n");
-	settextstyle(2,0,7);
-	outtextxy(560,350,"GVHD: Doan Vu Thinh\n");
-	
 	//polygon 
 	rectangle(20,320,110,360);
 	settextstyle(2,0,7);
@@ -123,6 +108,31 @@ void CUI_init(){
    // Draw and fill the rectangle
    rectangle(470, 390, 560, 430);
    bar(471, 391, 559, 429);	
+   
+   	// Set fill style and color
+   setfillstyle(SOLID_FILL, CYAN);
+   setcolor(CYAN);
+   // Draw and fill the rectangle
+   rectangle(20, 440, 110, 480);
+   bar(21, 441, 109, 479);
+	// Set fill style and color
+   setfillstyle(SOLID_FILL, DARKGRAY);
+   setcolor(DARKGRAY);
+   // Draw and fill the rectangle
+   rectangle(170, 440, 260, 480);
+   bar(171, 441, 259, 479);	
+	// Set fill style and color
+   setfillstyle(SOLID_FILL, LIGHTGREEN);
+   setcolor(LIGHTGREEN);
+   // Draw and fill the rectangle
+   rectangle(320, 440, 410, 480);
+   bar(321, 441, 409, 479);	
+   // Set fill style and color
+   setfillstyle(SOLID_FILL, WHITE);
+   setcolor(WHITE);
+   // Draw and fill the rectangle
+   rectangle(470, 440, 560, 480);
+   bar(471, 441, 559, 479);	
 }
 
 //using mouse to select functions loadfile, keyboard, ...
@@ -246,11 +256,16 @@ void click(){
             } 
             
             if (x_mouse > 660 && x_mouse < 760 && y_mouse > 190 && y_mouse < 230) {
-                reset();
+                isPolygonClicked = false;
+			    isCricleClicked = false;
+			    isElipClicked = false;
+			    sodinh = 0;
+			    cleardevice();
+			    CUI_init();
             }
 			
 			if (x_mouse > 660 && x_mouse < 760 && y_mouse > 250 && y_mouse < 290) {
-                exit();
+                exit(0);
             }            
             
             // N?t "Polygon"
@@ -287,7 +302,6 @@ void mousepolygon() {
                 td[sodinh].x = x;
                 td[sodinh].y = y;
                 sodinh++;
-
                 putpixel(x, y, WHITE);
 
                 if (sodinh >= 3 ) {
@@ -313,9 +327,7 @@ void mouseCircle() {
                 td[sodinh].x = x;
 	            td[sodinh].y = y;
 	            sodinh++;
-	
 	            putpixel(x, y, WHITE);
-	
 	            if (sodinh == 2) {
 	                drawCircle();
 	                break;
@@ -362,14 +374,11 @@ void mouseElip(){
 void keyboard(){
 	printf("Nhap so dinh: ");
     scanf("%d", &sodinh);
-    printf("Nhap vecto\n");
+    printf("Nhap toa do\n");
     for (int i = 0; i < sodinh; i++) {
-        printf("Vecto %d: ", i + 1);
+        printf("Toa do %d: ", i + 1);
         scanf("%d %d", &td[i].x, &td[i].y);
     }
-    printpoints(td,sodinh);
-	printf("Finished!\n");
-	fclose(fp);
 }
 
 
@@ -512,7 +521,7 @@ void drawEllipse() {
         }
         delay(50); 
     }
-    printpoints(td,sodinh);
+    
 }
 void fillElip() {
 	bool isColorChosen = false;
@@ -553,6 +562,19 @@ void red(){
 void magenta(){
 	setfillstyle(SOLID_FILL, MAGENTA);
 }
+void cyan(){
+	setfillstyle(SOLID_FILL, CYAN);
+}
+void darkgray(){
+	setfillstyle(SOLID_FILL, DARKGRAY);
+}
+void lightgreen(){
+	setfillstyle(SOLID_FILL, LIGHTGREEN);
+}
+void white(){
+	setfillstyle(SOLID_FILL, WHITE);
+}
+
 void choosecolor() {
     int x_mouse, y_mouse;
     bool colorChosen = false; 
@@ -571,26 +593,25 @@ void choosecolor() {
             } else if (x_mouse > 470 && x_mouse < 560 && y_mouse > 390 && y_mouse < 430) {
                 magenta();
                 colorChosen = true;
+            } else if (x_mouse > 20 && x_mouse < 110 && y_mouse > 440 && y_mouse < 480) {
+                cyan();
+                colorChosen = true;
+            }  else if (x_mouse > 170 && x_mouse < 260 && y_mouse > 440 && y_mouse < 480) {
+                darkgray();
+                colorChosen = true;
+            }  else if (x_mouse > 320 && x_mouse < 410 && y_mouse > 440 && y_mouse < 480) {
+                lightgreen();
+                colorChosen = true;
+            }  else if (x_mouse > 470 && x_mouse < 560 && y_mouse > 440 && y_mouse < 480) {
+                white();
+                colorChosen = true;
             }
         }
     }
 }
-//reset
-void reset(){
-	isPolygonClicked = false;
-    isCricleClicked = false;
-    isElipClicked = false;
-    sodinh = 0;
-    cleardevice();
-    CUI_init();
-}
-//exit
-void exit(){ 
-    exit(0);
-}
 
 int main(){
-	initwindow(800,460);
+	initwindow(800,500);
 	CUI_init();
 	//dung chuot
 	click();
