@@ -83,7 +83,14 @@ void CUI_init(){
 	rectangle(420,320,510,360);
 	settextstyle(2,0,7);
 	outtextxy(430,330,"Ellipse\n");
-	
+	settextstyle(2,0,7);
+	outtextxy(570,330,"MSSV: 63134775\n");
+	settextstyle(2,0,7);
+	outtextxy(570,360,"Ten SV: Nguyen Huu Nghia\n");
+	settextstyle(2,0,7);
+	outtextxy(570,390,"Lop: 63.CNTT-4\n");
+	settextstyle(2,0,7);
+	outtextxy(570,420,"GVHD: Doan Vu Thinh\n");
    	// Set fill style and color
    setfillstyle(SOLID_FILL, YELLOW);
    setcolor(YELLOW);
@@ -133,6 +140,7 @@ void CUI_init(){
    // Draw and fill the rectangle
    rectangle(470, 440, 560, 480);
    bar(471, 441, 559, 479);	
+   
 }
 
 //using mouse to select functions loadfile, keyboard, ...
